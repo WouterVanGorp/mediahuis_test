@@ -1,5 +1,5 @@
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
-import { Logo, Container } from './components';
+import { Logo, Container, PokemonFilter } from './components';
 
 
 const client = new GraphQLClient({
@@ -12,7 +12,7 @@ export default function App() {
       <>
         <Container>
           <Logo />
-          {/* Build your app here */}
+          <PokemonFilter />
         </Container>
       </>
     </ClientContext.Provider>

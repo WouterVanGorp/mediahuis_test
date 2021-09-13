@@ -1,0 +1,25 @@
+:root {
+    --color-base-blue: #3a5d9f;
+    --color-base-yellow: #fdcc07;
+    --color-base-white: #ffffff;
+    --color-base-grey: #c1c8ca;
+
+    --color-poke-normal: #a8a77a;
+    --color-poke-fire: #ee8130;
+    --color-poke-water: #6390f0;
+    --color-poke-electric: #f7d02c;
+    --color-poke-grass: #7ac74c;
+    --color-poke-ice: #96d9d6;
+    --color-poke-fighting: #c22e28;
+    --color-poke-poison: #a33ea1;
+    --color-poke-ground: #e2bf65;
+    --color-poke-flying: #a98ff3;
+    --color-poke-psychic: #f95587;
+    --color-poke-bug: #a6b91a;
+    --color-poke-rock: #b6a136;
+    --color-poke-ghost: #735797;
+    --color-poke-dragon: #6f35fc;
+    --color-poke-dark: #705746;
+    --color-poke-steel: #b7b7ce;
+    --color-poke-fairy: #d685ad;
+  }
