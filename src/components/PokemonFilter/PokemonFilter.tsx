@@ -1,27 +1,28 @@
+import { PokemonOverview as Pokemon } from "models";
 import { PokemonList } from "components";
-import { useQuery } from "graphql-hooks";
-import { PokemonOverview } from "models";
+import { APIError } from "graphql-hooks";
 
-export function PokemonFilter() {
-  const POKEMONS_QUERY = `query PokemonFilter($amount: Int) {
-        Pokemons(first: $amount) {
-            id
-            name
-        }
-      }`;
+interface Props {
+    error: APIError<object> | undefined;
+    loading: boolean;
+    pokemons: Pokemon[];
+    onPokemonClick: (name: string) => void;
 
-  const { loading, error, data } = useQuery<{ Pokemons: PokemonOverview[] }>(
-    POKEMONS_QUERY,
-    {
-      variables: {
-        amount: 151,
-      },
-    }
-  );
+    filter: string;
+    setFilter: (value: string) => void;
 
+}
+
+export function PokemonFilter({error, loading, pokemons, onPokemonClick, filter, setFilter}: Props) {
   return (
     <div>
-      <input type="text" />
+      <input
+        placeholder="TYPE TO FILTER"
+        type="text"
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
+
       {loading || error ? (
         loading ? (
           <div>Loading...</div>
@@ -29,7 +30,7 @@ export function PokemonFilter() {
           <div>Something went wrong, try again later.</div>
         )
       ) : (
-        <PokemonList pokemons={data?.Pokemons ?? []} />
+        <PokemonList pokemons={pokemons} onClick={onPokemonClick} />
       )}
     </div>
   );

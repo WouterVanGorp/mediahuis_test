@@ -1,0 +1,14 @@
+@import url(./../../styles/variables.css);
+
+.root {
+    color: var(--color-base-yellow);
+    background-color: var(--color-base-blue);
+
+    width: 150px;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}

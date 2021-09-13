@@ -3,14 +3,15 @@ import { PokemonItem } from "./../PokemonItem/PokemonItem";
 
 interface Props {
   pokemons: Pokemon[];
+  onClick: (name: string) => void;
 }
 
-export function PokemonList({ pokemons }: Props) {
+export function PokemonList({ pokemons, onClick }: Props) {
   return (
     <div>
       {pokemons.length === 0 ? "No pokemons found" : ""}
       {pokemons.map((p) => (
-        <PokemonItem key={p.id} name={p.name} />
+        <PokemonItem onClick={onClick} key={p.id} name={p.name} />
       ))}
     </div>
   );
