@@ -1,4 +1,5 @@
 import styles from "./PokemonItem.module.css";
+
 interface Props {
   name: string;
   onClick: (name: string) => void;

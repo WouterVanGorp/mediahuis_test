@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "graphql-hooks";
+import { useManualQuery, useQuery } from "graphql-hooks";
+
+import style from "./App.module.css";
 
 import { PokemonOverview } from "models";
+import { POKEMONS_QUERY, POKEMON_QUERY } from "./graphql";
 import { Logo, Container, PokemonFilter } from "./components";
 
 export default function App() {
   const [filter, setFilter] = useState<string>("");
   const [filterList, setFilterList] = useState<PokemonOverview[]>([]);
-
-  const POKEMONS_QUERY = `query PokemonFilter($amount: Int) {
-          Pokemons(first: $amount) {
-              id
-              name
-          }
-        }`;
 
   const { loading, error, data } = useQuery<{ Pokemons: PokemonOverview[] }>(
     POKEMONS_QUERY,
@@ -23,6 +19,8 @@ export default function App() {
       },
     }
   );
+
+  const [fetchPokemon, state] = useManualQuery(POKEMON_QUERY);
 
   useEffect(() => {
     if (!data) return;
@@ -34,21 +32,31 @@ export default function App() {
   }, [data, filter]);
 
   const onPokemonClick = (name: string) => {
-    console.log("Pokemon clicked " + name);
+    fetchPokemon({ variables: { name } });
   };
 
   return (
     <>
       <Container>
-        <Logo />
-        <PokemonFilter
-          error={error}
-          loading={loading}
-          pokemons={filterList}
-          onPokemonClick={onPokemonClick}
-          filter={filter}
-          setFilter={setFilter}
-        />
+        <div className={style.flexCol}>
+          <div>
+            <Logo />
+          </div>
+          <div className={style.flexRow}>
+            <div>
+              <PokemonFilter
+                error={error}
+                loading={loading}
+                pokemons={filterList}
+                onPokemonClick={onPokemonClick}
+                filter={filter}
+                setFilter={setFilter}
+              />
+            </div>
+            <div></div>
+          </div>
+          <div></div>
+        </div>
       </Container>
     </>
   );
