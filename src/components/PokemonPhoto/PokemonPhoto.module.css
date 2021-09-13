@@ -1,0 +1,6 @@
+@import url(./../../styles/variables.css);
+
+.pokemonName {
+  color: var(--color-base-blue);
+  font-weight: bold;
+}

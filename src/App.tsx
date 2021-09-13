@@ -3,9 +3,9 @@ import { useManualQuery, useQuery } from "graphql-hooks";
 
 import style from "./App.module.css";
 
-import { PokemonOverview } from "models";
+import { PokemonOverview, PokemonDetail as PokeDetail } from "models";
 import { POKEMONS_QUERY, POKEMON_QUERY } from "./graphql";
-import { Logo, Container, PokemonFilter } from "./components";
+import { Logo, Container, PokemonFilter, PokemonDetail } from "./components";
 
 export default function App() {
   const [filter, setFilter] = useState<string>("");
@@ -20,7 +20,7 @@ export default function App() {
     }
   );
 
-  const [fetchPokemon, state] = useManualQuery(POKEMON_QUERY);
+  const [fetchPokemon, state] = useManualQuery<{Pokemon: PokeDetail}>(POKEMON_QUERY);
 
   useEffect(() => {
     if (!data) return;
@@ -34,6 +34,10 @@ export default function App() {
   const onPokemonClick = (name: string) => {
     fetchPokemon({ variables: { name } });
   };
+
+  const onSavePokemon = (pokemon: PokeDetail) => {
+    console.log('save ' + pokemon);
+  }
 
   return (
     <>
@@ -53,7 +57,13 @@ export default function App() {
                 setFilter={setFilter}
               />
             </div>
-            <div></div>
+            <div>
+              { state?.data?.Pokemon ? 
+              <PokemonDetail pokemon={state.data.Pokemon} onSavePokemon={onSavePokemon} />
+              :
+              <span>Click pokemon to view details</span>
+             }
+            </div>
           </div>
           <div></div>
         </div>
