@@ -1,8 +1,7 @@
 .outer {
   margin-left: 1rem;
   display: flex;
-  min-height: 100%;
-  flex-direction: column; /* added */
+  flex-wrap: wrap;
   min-width: 500px;
 }
 
@@ -13,12 +12,13 @@
 }
 
 .title {
-  flex: 2;
   display: flex;
-  align-self: center;
+  justify-content: center;
+  font-size: small;
 }
 
 .item {
   display: flex;
   justify-content: flex-end;
+  width: 100%;
 }
