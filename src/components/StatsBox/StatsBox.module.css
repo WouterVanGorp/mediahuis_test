@@ -1,0 +1,16 @@
+@import url("./../../styles/variables.css");
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  color: var(--color-base-yellow);
+}
+
+.value {
+    color: var(--color-base-blue);
+    font-size: 25px;
+    margin-left: 0.25rem;
+  }

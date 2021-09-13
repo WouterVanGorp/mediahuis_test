@@ -7,3 +7,5 @@ export * from './PokemonList/PokemonList';
 
 export * from './PokemonDetail/PokemonDetail';
 export * from './PokemonPhoto/PokemonPhoto';
+export * from './PokemonStats/PokemonStats';
+export * from './StatsBox/StatsBox';

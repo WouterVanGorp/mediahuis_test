@@ -1,6 +1,6 @@
 import style from './../../App.module.css';
 import { PokemonDetail as Pokemon } from "./../../models";
-import { PokemonPhoto } from "components/PokemonPhoto/PokemonPhoto";
+import { PokemonStats, PokemonPhoto } from 'components';
 
 interface Props {
   pokemon: Pokemon;
@@ -13,7 +13,9 @@ export function PokemonDetail({ pokemon, onSavePokemon }: Props) {
       <div>
           <PokemonPhoto name={pokemon.name} img={pokemon.image} />
       </div>
-      <div></div>
+      <div>
+        <PokemonStats stats={pokemon.stats} />
+      </div>
       <div></div>
     </div>
   );
