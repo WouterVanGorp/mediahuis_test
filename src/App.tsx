@@ -10,6 +10,7 @@ import { Logo, Container, PokemonFilter, PokemonDetail } from "./components";
 export default function App() {
   const [filter, setFilter] = useState<string>("");
   const [filterList, setFilterList] = useState<PokemonOverview[]>([]);
+  const [activePokemon, setActivePokemon] = useState<PokeDetail | null>(null);
 
   const { loading, error, data } = useQuery<{ Pokemons: PokemonOverview[] }>(
     POKEMONS_QUERY,
@@ -20,8 +21,6 @@ export default function App() {
     }
   );
 
-  const [fetchPokemon, state] = useManualQuery<{Pokemon: PokeDetail}>(POKEMON_QUERY);
-
   useEffect(() => {
     if (!data) return;
     setFilterList(
@@ -31,13 +30,21 @@ export default function App() {
     );
   }, [data, filter]);
 
+  const [fetchPokemon, pokeState] =
+    useManualQuery<{ Pokemon: PokeDetail }>(POKEMON_QUERY);
+
+  useEffect(() => {
+    if (!pokeState.data?.Pokemon) return;
+    setActivePokemon(pokeState.data?.Pokemon)
+  }, [pokeState]);
+
   const onPokemonClick = (name: string) => {
     fetchPokemon({ variables: { name } });
   };
 
   const onSavePokemon = (pokemon: PokeDetail) => {
-    console.log('save ' + pokemon);
-  }
+    console.log("save " + pokemon);
+  };
 
   return (
     <>
@@ -58,11 +65,14 @@ export default function App() {
               />
             </div>
             <div>
-              { state?.data?.Pokemon ? 
-              <PokemonDetail pokemon={state.data.Pokemon} onSavePokemon={onSavePokemon} />
-              :
-              <span>Click pokemon to view details</span>
-             }
+              {activePokemon ? (
+                <PokemonDetail
+                  pokemon={activePokemon}
+                  onSavePokemon={onSavePokemon}
+                />
+              ) : (
+                <span>Click pokemon to view details</span>
+              )}
             </div>
           </div>
           <div></div>
