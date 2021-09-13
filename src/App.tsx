@@ -3,7 +3,7 @@ import Container from './Container';
 import Logo from './Logo';
 
 const client = new GraphQLClient({
-  url: process.env.REACT_APP_POKE_ENDPOINT,
+  url: process.env.REACT_APP_POKE_ENDPOINT ?? '',
 });
 
 export default function App() {
