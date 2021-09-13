@@ -12,6 +12,8 @@ export default function App() {
   const [filterList, setFilterList] = useState<PokemonOverview[]>([]);
   const [activePokemon, setActivePokemon] = useState<PokeDetail | null>(null);
 
+  // Here I would create a new useState hook to keep track of my squad that updates with the onSavePokeon
+
   const { loading, error, data } = useQuery<{ Pokemons: PokemonOverview[] }>(
     POKEMONS_QUERY,
     {
@@ -35,7 +37,7 @@ export default function App() {
 
   useEffect(() => {
     if (!pokeState.data?.Pokemon) return;
-    setActivePokemon(pokeState.data?.Pokemon)
+    setActivePokemon(pokeState.data?.Pokemon);
   }, [pokeState]);
 
   const onPokemonClick = (name: string) => {
