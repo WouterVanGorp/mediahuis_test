@@ -1,6 +1,6 @@
 import { GraphQLClient, ClientContext } from 'graphql-hooks';
-import Container from './Container';
-import Logo from './Logo';
+import { Logo, Container } from './components';
+
 
 const client = new GraphQLClient({
   url: process.env.REACT_APP_POKE_ENDPOINT ?? '',

@@ -1,6 +1,6 @@
 import styles from './Logo.module.css';
 
-export default function Logo(props: any) {
+export function Logo(props: any) {
   return (
     <img
       {...props}
